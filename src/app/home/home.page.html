@@ -46,17 +46,44 @@
           </div>
         </ion-col>
       </ion-row>
+        <ion-row color="primary" justify-content-center *ngIf="active">
+        <ion-card *ngIf="active">
+            <ion-header>{{bestBank.nazwa}}</ion-header>
+            <ion-item><ion-card-title>NAJLEPSZA OFERTA</ion-card-title></ion-item>
+            <ion-item *ngIf="!bestBank.show">
+                Całkowity koszt: {{calculateForBank(bestBank)}}zł
+            </ion-item>
+            <ion-item *ngIf="bestBank.show">
+                Prowizja stała: {{bestBank.fix}}zł
+                Prowizja procentowa: {{bestBank.perc}}%
+            </ion-item>
+            <ion-item *ngIf="bestBank.show">
+                Całkowity koszt: {{calculateForBank(bestBank)}}zł
+                Całkowita prowizja {{obliczProwizje(bestBank)}}zł
+            </ion-item>
+            <ion-item *ngIf="!bestBank.show"><ion-button  (click)="activate(bestBank)">Pokaż szczegóły</ion-button></ion-item>
+            <ion-item *ngIf="bestBank.show"><ion-button  (click)="activate(bestBank)">Ukryj</ion-button></ion-item>
+
+        </ion-card>
+        </ion-row>
         <ion-row color="primary" justify-content-center *ngFor="let bank of banki">
-          <ion-card *ngIf="active">
+          <ion-card *ngIf="active && bank != bestBank">
             <ion-header>{{bank.nazwa}}</ion-header>
-            <ion-item>
+              <ion-item *ngIf="!bank.show">
+                  Całkowity koszt: {{calculateForBank(bank)}}zł
+              </ion-item>
+            <ion-item *ngIf="bank.show">
               Prowizja stała: {{bank.fix}}zł
               Prowizja procentowa: {{bank.perc}}%
             </ion-item>
-            <ion-item>
+            <ion-item *ngIf="bank.show">
               Całkowity koszt: {{calculateForBank(bank)}}zł
               Całkowita prowizja {{obliczProwizje(bank)}}zł
             </ion-item>
+              <ion-item *ngIf="!bank.show"><ion-button  (click)="activate(bank)">Pokaż szczegóły</ion-button></ion-item>
+              <ion-item *ngIf="bank.show"><ion-button  (click)="activate(bank)">Ukryj</ion-button></ion-item>
+
+
           </ion-card>
         </ion-row>
     </ion-grid>
