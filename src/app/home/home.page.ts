@@ -14,12 +14,16 @@ export class HomePage {
     {nazwa: "mBank", fix: 1000, perc: 2.5, show: false},
   ]
   constructor() {}
+  public company = false;
   public bestBank: any;
   public raty: any[];
   public kwotaKredytu: any = 0;
   public active = false;
-  activate(bank){
+  activate(bank) {
     bank.show = !bank.show;
+  }
+  changeOffer() {
+      this.company = !this.company;
   }
   findBest() {
     this.bestBank = this.banki.reduce((acc, curr) => {

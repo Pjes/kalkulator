@@ -16,6 +16,10 @@
           </div>
           <div padding>
             <ion-item>
+              <ion-toggle (ionChange)="changeOffer()"></ion-toggle>
+              <ion-label>{{company ? "Oferta dla firm" : "Oferta Konsumencka"}}</ion-label>
+            </ion-item>
+            <ion-item>
               <ion-input  name="kwota" type="number" placeholder="Kwota kredytu" ngModel required></ion-input>
               <ion-label>zł</ion-label>
             </ion-item>
@@ -34,7 +38,7 @@
             <ion-item>
               <ion-select name="rodzaj" placeholder="Rodzaj kredytu" ngModel required>
                 <ion-select-option value="a">Raty równe</ion-select-option>
-                <ion-select-option value="b">Raty malejące</ion-select-option>
+                <ion-select-option *ngIf="company" value="b">Raty malejące</ion-select-option>
               </ion-select>
             </ion-item>
               <ion-item *ngIf="active" justify-content-center>
